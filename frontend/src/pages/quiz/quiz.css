@@ -1,0 +1,130 @@
+/* =========================
+   QUIZ PAGE STYLES
+   ========================= */
+
+.quiz-container {
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.quiz-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* =========================
+   TOPIC INPUT
+   ========================= */
+
+.quiz-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.quiz-input:focus {
+  outline: none;
+  border-color: #6a5acd;
+}
+
+/* =========================
+   QUESTION CARD
+   ========================= */
+
+.quiz-question {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* =========================
+   OPTIONS
+   ========================= */
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.quiz-option {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quiz-option:hover {
+  background-color: #f4f4ff;
+  border-color: #6a5acd;
+}
+
+.quiz-option input {
+  cursor: pointer;
+}
+
+/* =========================
+   NAV BUTTON
+   ========================= */
+
+.quiz-next-btn {
+  margin-top: 15px;
+}
+
+/* =========================
+   LOADING TEXT
+   ========================= */
+
+.quiz-loading {
+  margin-top: 15px;
+  font-style: italic;
+  color: #666;
+}
+
+/* =========================
+   RESULT SECTION
+   ========================= */
+
+.quiz-result {
+  text-align: center;
+}
+
+.quiz-score {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #2c7be5;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 600px) {
+  .quiz-container {
+    padding: 20px;
+  }
+
+  .quiz-title {
+    font-size: 24px;
+  }
+
+  .quiz-question {
+    font-size: 16px;
+  }
+}
