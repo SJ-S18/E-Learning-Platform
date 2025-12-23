@@ -6,12 +6,12 @@ import toast, { Toaster } from "react-hot-toast";
 const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // ✅ FIXED
+  const [user, setUser] = useState(null); 
   const [isAuth, setIsAuth] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // ---------------- LOGIN ----------------
+
   async function loginUser(email, password, navigate) {
     setBtnLoading(true);
     try {
@@ -34,7 +34,6 @@ export const UserContextProvider = ({ children }) => {
     }
   }
 
-  // ---------------- REGISTER ----------------
   async function registerUser(name, email, password, navigate) {
     setBtnLoading(true);
     try {
@@ -54,7 +53,6 @@ export const UserContextProvider = ({ children }) => {
     }
   }
 
-  // ---------------- VERIFY OTP ----------------
   async function verifyOtp(otp, navigate) {
     setBtnLoading(true);
     const activationToken = localStorage.getItem("activationToken");
@@ -72,7 +70,7 @@ export const UserContextProvider = ({ children }) => {
       });
 
       toast.success(data.message);
-      localStorage.removeItem("activationToken"); // ✅ FIXED
+      localStorage.removeItem("activationToken"); 
       navigate("/login");
     } catch (error) {
       toast.error(error.response?.data?.message || "OTP verification failed");
@@ -81,7 +79,6 @@ export const UserContextProvider = ({ children }) => {
     }
   }
 
-  // ---------------- FETCH USER ----------------
   async function fetchUser() {
     const token = localStorage.getItem("token");
 

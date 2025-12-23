@@ -16,14 +16,12 @@ const Quiz = () => {
   const [quizLoading, setQuizLoading] = useState(false);
   const [finished, setFinished] = useState(false);
 
-  // 🔐 Protect Quiz (login required)
   useEffect(() => {
     if (!loading && !isAuth) {
       navigate("/login");
     }
   }, [isAuth, loading, navigate]);
 
-  // ✅ REAL AI QUIZ FROM BACKEND
   const generateQuiz = async () => {
     if (!topic.trim()) {
       alert("Please enter a topic");
@@ -83,7 +81,7 @@ const Quiz = () => {
     <div className="quiz-container">
       <h1 className="quiz-title">AI Quiz Generator</h1>
 
-      {/* Topic Input */}
+     
       {!questions.length && (
         <>
           <input
@@ -104,7 +102,7 @@ const Quiz = () => {
         </>
       )}
 
-      {/* Quiz Questions */}
+      
       {questions.length > 0 && !finished && (
         <div>
           <h3 className="quiz-question">
@@ -136,7 +134,6 @@ const Quiz = () => {
         </div>
       )}
 
-      {/* Result */}
       {finished && (
         <div className="quiz-result">
           <h2>Quiz Completed 🎉</h2>

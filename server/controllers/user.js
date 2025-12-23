@@ -9,7 +9,6 @@ export const register = TryCatch(async (req, res) => {
 
   let user = await User.findOne({ email });
 
-  // ❌ if user already exists and verified
   if (user) {
     return res.status(400).json({
       message: "User already exists, please login",
@@ -18,14 +17,11 @@ export const register = TryCatch(async (req, res) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
 
-  // ✅ create user ONLY ONCE
   user = await User.create({
     name,
     email,
     password: hashPassword,
   });
-
-  // ✅ ALWAYS 6-digit OTP
   const otp = Math.floor(100000 + Math.random() * 900000);
 
   const activationToken = jwt.sign(
@@ -58,8 +54,6 @@ export const verifyUser = TryCatch(async (req, res) => {
     return res.status(400).json({ message: "Invalid OTP" });
   }
 
-  // ✅ DO NOTHING ELSE
-  // ❌ DO NOT CREATE USER AGAIN
 
   return res.status(200).json({
     message: "User verified successfully",

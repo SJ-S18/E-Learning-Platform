@@ -18,11 +18,16 @@ const AdminUsers = ({ user }) => {
 
   const fetchUsers = async () => {
     try {
-      const { data } = await axios.get(`${server}/api/users`, {
-        headers: {
-          token: localStorage.getItem("token"),
-        },
-      });
+      const token = localStorage.getItem("token");
+
+      const { data } = await axios.get(
+        `${server}/api/admin/users`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setUsers(data.users || []);
     } catch (error) {
@@ -39,12 +44,14 @@ const AdminUsers = ({ user }) => {
       return;
 
     try {
+      const token = localStorage.getItem("token");
+
       const { data } = await axios.put(
-        `${server}/api/user/${id}`,
+        `${server}/api/admin/user/${id}`,
         {},
         {
           headers: {
-            token: localStorage.getItem("token"),
+            Authorization: `Bearer ${token}`,
           },
         }
       );

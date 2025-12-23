@@ -35,7 +35,7 @@ const schema = new mongoose.Schema({
   },
 });
 
-// 🚨 THIS LINE IS THE KEY FIX
+
 const Courses =
   mongoose.models.Courses || mongoose.model("Courses", schema);
 

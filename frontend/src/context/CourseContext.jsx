@@ -6,11 +6,11 @@ const CourseContext = createContext();
 
 export const CourseContextProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
-  const [course, setCourse] = useState(null);     // ✅ FIXED
-  const [mycourse, setMyCourse] = useState([]);   // subscribed courses
+  const [course, setCourse] = useState(null);     
+  const [mycourse, setMyCourse] = useState([]);   
   const [loading, setLoading] = useState(true);
 
-  // ---------------- FETCH ALL COURSES ----------------
+ 
   async function fetchCourses() {
     try {
       const { data } = await axios.get(`${server}/api/course/all`);
@@ -20,7 +20,7 @@ export const CourseContextProvider = ({ children }) => {
     }
   }
 
-  // ---------------- FETCH SINGLE COURSE ----------------
+ 
   async function fetchCourse(id) {
     try {
       const { data } = await axios.get(`${server}/api/course/${id}`);
@@ -30,10 +30,10 @@ export const CourseContextProvider = ({ children }) => {
     }
   }
 
-  // ---------------- FETCH MY COURSES (AUTH REQUIRED) ----------------
+ 
   async function fetchMyCourse() {
     const token = localStorage.getItem("token");
-    if (!token) return; // ✅ FIXED
+    if (!token) return;
 
     try {
       const { data } = await axios.get(`${server}/api/mycourse`, {

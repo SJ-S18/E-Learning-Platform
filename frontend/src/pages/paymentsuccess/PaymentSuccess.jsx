@@ -1,24 +1,20 @@
 import React from "react";
-import "./paymentsuccess.css";
-import { Link, useParams } from "react-router-dom";
 
-const PaymentSuccess = ({ user }) => {
-  const params = useParams();
-
+const PaymentSuccess = () => {
   return (
-    <div className="payment-success-page">
-      {user && (
-        <div className="success-message">
-          <h2>Payment successful</h2>
-          <p>Your course subscription has been activated</p>
-          <p>Reference no - {params.id}</p>
-          <Link to={`/${user._id}/dashboard`} className="common-btn">
-            Go to Dashboard
-          </Link>
-        </div>
-      )}
+    <div
+      style={{
+        minHeight: "70vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
+      <h1 style={{ color: "green" }}>✅ Payment Successful</h1>
+      <p>You have successfully enrolled in the course.</p>
     </div>
   );
 };
 
-export default PaymentSuccess; // ✅ FIXED
+export default PaymentSuccess;

@@ -11,8 +11,8 @@ const Account = () => {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
-    localStorage.removeItem("token"); // ✅ FIXED
-    setUser(null);                    // ✅ FIXED
+    localStorage.removeItem("token"); 
+    setUser(null);                    
     setIsAuth(false);
     toast.success("Logged Out");
     navigate("/login");

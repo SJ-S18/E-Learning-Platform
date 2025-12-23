@@ -52,10 +52,8 @@ const App = () => {
               path="/course/:id"
               element={isAuth ? <CourseDescription user={user} /> : <Login />}
             />
-            <Route
-              path="/payment-success/:id"
-              element={isAuth ? <PaymentSuccess user={user} /> : <Login />}
-            />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+
             <Route
               path="/:id/dashboard"
               element={isAuth ? <Dashboard user={user} /> : <Login />}

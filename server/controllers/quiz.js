@@ -34,7 +34,6 @@ Format:
     const result = await model.generateContent(prompt);
     const text = result.response.text();
 
-    // 🔹 Clean response to extract JSON safely
     const start = text.indexOf("[");
     const end = text.lastIndexOf("]") + 1;
 
@@ -45,7 +44,7 @@ Format:
   } catch (error) {
     console.error("Gemini Quiz Error:", error);
 
-    // ✅ Safe fallback (never fails demo)
+  
     const fallbackQuestions = Array.from({ length: 10 }).map((_, index) => ({
       question: `Sample Question ${index + 1} on ${req.body.topic}?`,
       options: ["Option A", "Option B", "Option C", "Option D"],

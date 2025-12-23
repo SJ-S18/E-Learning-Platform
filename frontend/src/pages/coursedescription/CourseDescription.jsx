@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./coursedescription.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { CourseData } from "../../context/CourseContext";
+import { UserData } from "../../context/UserContext";
 import { server } from "../../main";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { UserData } from "../../context/UserContext";
 import Loading from "../../components/loading/Loading";
 
 const CourseDescription = ({ user }) => {
-  const { id } = useParams();
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -23,6 +23,12 @@ const CourseDescription = ({ user }) => {
   const checkoutHandler = async () => {
     try {
       const token = localStorage.getItem("token");
+
+      if (!token) {
+        toast.error("Please login first");
+        return;
+      }
+
       setLoading(true);
 
       const { data } = await axios.post(
@@ -40,14 +46,25 @@ const CourseDescription = ({ user }) => {
         amount: data.order.amount,
         currency: "INR",
         name: "E-Learning",
-        description: "Learn with us",
+        description: "Course Purchase",
         order_id: data.order.id,
 
+      
         handler: async function (response) {
           try {
+            if (!id) {
+              toast.error("Course ID missing");
+              return;
+            }
+
             const verify = await axios.post(
-              `${server}/api/verification/${id}`,
-              response,
+              `${server}/api/payment/verification`,
+              {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                courseId: id,
+              },
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -59,21 +76,31 @@ const CourseDescription = ({ user }) => {
             await fetchCourses();
             await fetchMyCourse();
 
-            toast.success(verify.data.message);
-            navigate(`/payment-success/${response.razorpay_payment_id}`);
-          } catch (err) {
-            toast.error(err.response?.data?.message || "Payment failed");
+            toast.success(
+              verify.data.message || "Payment Successful"
+            );
+
+            navigate(
+              `/payment-success/${response.razorpay_payment_id}`
+            );
+          } catch (error) {
+            toast.error(
+              error.response?.data?.message ||
+                "Payment verification failed"
+            );
           } finally {
             setLoading(false);
           }
         },
 
-        theme: { color: "#8a4baf" },
+        theme: {
+          color: "#8a4baf",
+        },
       };
 
       const razorpay = new window.Razorpay(options);
       razorpay.open();
-    } catch (err) {
+    } catch (error) {
       toast.error("Checkout failed");
       setLoading(false);
     }

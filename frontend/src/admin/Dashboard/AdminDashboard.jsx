@@ -13,14 +13,12 @@ const AdminDashboard = ({ user }) => {
     totalUsers: 0,
   });
 
-  // ✅ Protect admin route
   useEffect(() => {
     if (user && user.role !== "admin") {
       navigate("/");
     }
   }, [user, navigate]);
 
-  // ✅ Fetch dashboard stats
   const fetchStats = async () => {
     try {
       const { data } = await axios.get(`${server}/api/stats`, {
